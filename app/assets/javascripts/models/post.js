@@ -1,3 +1,3 @@
 App.Models.Post = Backbone.Model.extend({
-  url: '/posts'
+  urlRoot: '/posts'
 });

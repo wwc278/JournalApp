@@ -25,7 +25,6 @@ App.Views.PostsListView = Backbone.View.extend({
 
     post.destroy({
       wait: true,
-      url: post.url + "/" + id,
       error: function(){
         alert('Something went wrong. We are sorry.');
       }

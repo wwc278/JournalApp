@@ -3,11 +3,10 @@ App.Views.PostFormView = Backbone.View.extend({
     "submit form": "submit"
   },
 
-  render: function(errors){
-    errors = errors || []
+  render: function(attrs, errors){
     var renderedContent = JST['post_form']({
-      post: this.model,
-      errors: errors
+      attrs: attrs || {},
+      errors: errors || []
     });
     this.$el.html(renderedContent);
     return this;
@@ -31,9 +30,8 @@ App.Views.PostFormView = Backbone.View.extend({
     this.errors = that.model.save(serializedFormData, {
       success: callback,
       error: function(model, xhr, options) {
-        that.model.
         var errors = xhr.responseJSON;
-        that.render(errors);
+        that.render(serializedFormData["post"], errors);
       }
     });
   }
