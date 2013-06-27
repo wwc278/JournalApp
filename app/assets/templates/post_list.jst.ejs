@@ -1,0 +1,11 @@
+<h1>Index View</h1>
+<ul>
+  <% posts.each(function(post){ %>
+    <li>
+      <a href='#/posts/<%= post.escape("id")%>'><%= post.escape("title") %>
+      </a>
+      <button class='delete' data-id='<%= post.escape("id") %>'>Delete</button>
+    </li>
+    <% })%>
+</ul>
+<a href='#/posts/new'>New Post</a>
