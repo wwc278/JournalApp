@@ -15,7 +15,8 @@ App.Views.PostsListView = Backbone.View.extend({
   },
 
   events: {
-    "click button.delete": "clear"
+    "click button.delete": "clear",
+    "click button.edit"  : "edit"
   },
 
   clear: function(e){
@@ -26,9 +27,14 @@ App.Views.PostsListView = Backbone.View.extend({
     post.destroy({
       wait: true,
       error: function(){
-        alert('Something went wrong. We are sorry.');
+        alert('Your grandmother just died. We are sorry.');
       }
     })
+  },
+
+  edit: function(e){
+    var id = $(e.target).data("id");
+    Backbone.history.navigate("#/posts/" + id + "/edit")
   }
 
 });

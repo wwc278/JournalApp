@@ -5,8 +5,11 @@
   <br />
 
   <label for="post_body">Body</label>
-  <input type="text" name="post[body]"
-         value="<%= attrs.body %>" id="post_body">
+  <textarea type="text" name="post[body]" id="post_body">
+    <%= attrs.body %>
+  </textarea>
+
+  <p>This is paragraph text.</p>
 
   <p><input type="submit" value="Post!"></p>
 </form>
@@ -16,5 +19,3 @@
     <li><%= error %></li>
   <% }); %>
 </ul>
-
-<a href='#/'>Back</a>

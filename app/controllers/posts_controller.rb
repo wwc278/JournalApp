@@ -11,6 +11,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    post = Post.find(params[:id])
+    if post.delete
+      render :json => post
+    else
+      render :json => post, :status => 422
+    end
+  end
+
   def index
     @posts = Post.all
     respond_to do |format|
@@ -19,12 +28,13 @@ class PostsController < ApplicationController
     end
   end
 
-  def destroy
+  def update
     post = Post.find(params[:id])
-    if post.delete
+
+    if post.update_attributes(params[:post])
       render :json => post
     else
-      render :json => post, :status => 422
+      render :json => post.errors.full_messages, :status => 422
     end
   end
 

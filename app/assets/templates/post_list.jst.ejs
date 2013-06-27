@@ -4,8 +4,12 @@
     <li>
       <a href='#/posts/<%= post.escape("id")%>'><%= post.escape("title") %>
       </a>
-      <button class='delete' data-id='<%= post.escape("id") %>'>Delete</button>
+      <br>
+      <button class='delete' data-id='<%= post.escape("id") %>'>
+        Delete
+      </button>
+      <button class='edit' data-id='<%= post.escape("id") %>'>Edit</button>
     </li>
-    <% })%>
+  <% })%>
 </ul>
 <a href='#/posts/new'>New Post</a>

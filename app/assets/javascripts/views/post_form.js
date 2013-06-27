@@ -5,7 +5,7 @@ App.Views.PostFormView = Backbone.View.extend({
 
   render: function(attrs, errors){
     var renderedContent = JST['post_form']({
-      attrs: attrs || {},
+      attrs: attrs || this.model.attributes,
       errors: errors || []
     });
     this.$el.html(renderedContent);
@@ -19,12 +19,12 @@ App.Views.PostFormView = Backbone.View.extend({
 
     if (that.model.id) {
       callback = function() {
-        Backbone.history.navigate('#/');
+        Backbone.history.navigate('#/posts/' + that.model.id);
       }
     } else {
       var callback = function() {
         that.collection.add(that.model);
-        Backbone.history.navigate('#/');
+        Backbone.history.navigate('#/posts/' + that.model.id);
       }
     }
     this.errors = that.model.save(serializedFormData, {

@@ -1,20 +1,22 @@
 App.Routers.PostsRouter = Backbone.Router.extend({
-  initialize: function($rootEl, posts) {
-    this.$rootEl = $rootEl;
+  initialize: function($indexEl, $showEl, posts) {
+    this.$indexEl = $indexEl;
+    this.$showEl = $showEl;
     this.posts = posts;
   },
 
   routes: {
-    ""          : "postsList",
-    "posts/new" : "newPost",
-    "posts/:id" : "postShow"
+    ""               : "postsList",
+    "posts/new"      : "newPost",
+    "posts/:id"      : "postShow",
+    "posts/:id/edit" : "postEdit"
   },
 
   postsList: function() {
     var postsListView = new App.Views.PostsListView({
       collection: this.posts
     });
-    this.$rootEl.html(postsListView.render().$el);
+    this.$indexEl.html(postsListView.render().$el);
   },
 
   newPost: function() {
@@ -22,7 +24,16 @@ App.Routers.PostsRouter = Backbone.Router.extend({
       collection: this.posts,
       model: new App.Models.Post()
     });
-    this.$rootEl.html(newPostView.render().$el);
+    this.$showEl.html(newPostView.render().$el);
+  },
+
+  postEdit: function(id) {
+    var post = this.posts.get(id);
+    var newPostView = new App.Views.PostFormView({
+      collection: this.posts,
+      model: post
+    });
+    this.$showEl.html(newPostView.render().$el);
   },
 
   postShow: function(id) {
@@ -30,7 +41,7 @@ App.Routers.PostsRouter = Backbone.Router.extend({
     var postShowView = new App.Views.PostShowView({
       model: post
     });
-    this.$rootEl.html(postShowView.render().$el);
+    this.$showEl.html(postShowView.render().$el);
   }
 
 });

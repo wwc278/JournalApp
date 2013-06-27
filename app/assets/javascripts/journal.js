@@ -4,7 +4,7 @@ window.App = {
   Views: {},
   Routers: {},
 
-  initialize: function($rootEl){
+  initialize: function($indexEl, $showEl){
     // include csrf token in all non-get requests.
     var csrfToken = $("meta[name=csrf-token]").attr('content');
     $(document).ajaxSend(function(event, xhr, options) {
@@ -22,7 +22,7 @@ window.App = {
       collection: posts
     });
 
-    new App.Routers.PostsRouter($rootEl, posts)
+    new App.Routers.PostsRouter($indexEl, $showEl, posts)
     Backbone.history.start();
   }
 };
